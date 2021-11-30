@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Livewire\UsersList;
+use App\Http\Livewire\UserStore;
+use App\Http\Livewire\UserUpdate;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +24,20 @@ Route::get("/", function()
 
 });
 
-Route::middleware(["auth:sanctum", "verified"])->get("/dashboard", function()
+Route::group(["middleware" => ["auth:sanctum", "verified"]], function()
 {
 
-    return view("dashboard");
+	Route::get("/dashboard", function()
+	{
 
-})->name("dashboard");
+		return view("dashboard");
+
+	})->name("dashboard");
+
+	Route::get("/dashboard/users", UsersList::class)->name("user.index");
+
+	Route::get("/dashboard/create-user", UserStore::class)->name("user.create");
+
+	Route::get("/dashboard/edit-user/{user}", UserUpdate::class)->name("user.edit");
+
+});
