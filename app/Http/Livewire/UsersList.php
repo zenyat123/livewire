@@ -18,6 +18,8 @@ class UsersList extends Component
 
     public $columns = ["id", "name", "email"];
 
+    public $modalUserDeletion = false;
+
 	public function mount()
 	{
 
@@ -25,29 +27,17 @@ class UsersList extends Component
 
 	}
 
-    public function render()
+    public function updatingSearch()
     {
 
-    	$users = User::orderBy($this->column, $this->order);
-
-		if($this->search)
-		{
-
-			$users->where("name", "like", "%" . $this->search . "%")
-			    ->orWhere("email", "like", "%" . $this->search . "%");
-
-		}
-
-		$users = $users->paginate(6);
-
-        return view("livewire.users-list", compact("users"));
+        $this->resetPage();
 
     }
 
-    public function destroy(User $user)
+    public function cleanFilter()
     {
 
-    	$user->delete();
+        $this->reset(["search"]);
 
     }
 
@@ -60,10 +50,38 @@ class UsersList extends Component
 
     }
 
-    public function cleanFilter()
+    public function confirmUserDeletion($id)
     {
 
-    	$this->reset(["search"]);
+        $this->modalUserDeletion = $id;
+
+    }
+
+    public function deleteUser(User $user)
+    {
+
+        $user->delete();
+
+        $this->modalUserDeletion = false;
+
+    }
+
+    public function render()
+    {
+
+        $users = User::orderBy($this->column, $this->order);
+
+        if($this->search)
+        {
+
+            $users->where("name", "like", "%" . $this->search . "%")
+                ->orWhere("email", "like", "%" . $this->search . "%");
+
+        }
+
+        $users = $users->paginate(6);
+
+        return view("livewire.users-list", compact("users"));
 
     }
 

@@ -1286,9 +1286,6 @@ select {
 .max-w-6xl {
 	max-width: 72rem;
 }
-.max-w-screen-md {
-	max-width: 768px;
-}
 .max-w-screen-sm {
 	max-width: 640px;
 }
@@ -1354,9 +1351,6 @@ select {
 }
 .flex-wrap {
 	flex-wrap: wrap;
-}
-.content-end {
-	align-content: flex-end;
 }
 .items-center {
 	align-items: center;

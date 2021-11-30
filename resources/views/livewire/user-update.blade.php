@@ -45,7 +45,13 @@
                         {{ $message }}
                     @enderror
 
-					<x-jet-button type="submit" class="mt-6">Update</x-jet-button>
+                    <div class = "flex items-center mt-6">
+
+						<x-jet-button type="submit">Update</x-jet-button>
+
+						<x-jet-action-message on="updated" class="ml-3">User updated</x-jet-action-message>
+
+					</div>
 
 				</form>
 

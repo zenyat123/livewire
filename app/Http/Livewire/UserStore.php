@@ -23,13 +23,6 @@ class UserStore extends Component
 
     ];
 
-    public function render()
-    {
-
-        return view("livewire.user-store");
-
-    }
-
     public function store()
     {
 
@@ -41,13 +34,21 @@ class UserStore extends Component
 
             "name" => $this->name,
             "email" => $this->email,
-            "password" => $this->password
+            "password" => $this->password,
+            "current_team_id" => 1
 
         ]);
 
-        session()->flash("response", "User created");
+        $this->emit("created");
 
-        return redirect()->route("user.index");
+        $this->reset("name", "email", "password");
+
+    }
+
+    public function render()
+    {
+
+        return view("livewire.user-store");
 
     }
 

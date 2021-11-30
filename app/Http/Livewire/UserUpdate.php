@@ -37,13 +37,6 @@ class UserUpdate extends Component
 
 	}
 
-    public function render()
-    {
-
-        return view("livewire.user-update");
-
-    }
-
     public function update()
     {
 
@@ -61,9 +54,14 @@ class UserUpdate extends Component
 
         ]);
 
-        session()->flash("response", "User updated");
+        $this->emit("updated");
 
-        return redirect()->route("user.index");
+    }
+
+    public function render()
+    {
+
+        return view("livewire.user-update");
 
     }
 

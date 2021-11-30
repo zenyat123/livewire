@@ -45,7 +45,13 @@
                         {{ $message }}
                     @enderror
 
-					<x-jet-button type="submit" class="mt-6">Register</x-jet-button>
+                    <div class = "flex items-center mt-6">
+
+						<x-jet-button type="submit">Register</x-jet-button>
+
+						<x-jet-action-message on="created" class="ml-3">User created</x-jet-action-message>
+
+					</div>
 
 				</form>
 
